@@ -1,1 +1,11 @@
 To keep track of empty folders, we make the .gitkeep file in order to store folders, since git does not keep track of empty folders
+Nodemon: restarts server when file contents are changed
+dev dependncy: used while development not while production, it has no role in production
+to install use --save-dev or -D ie for nodemon: npm i --save-dev nodemon
+
+controller: functionality
+middleware: request from server, middleares checks the request
+DB: database connection logic
+models
+routes: routes for app
+utils: utility eg file uploading, mailing, tokens ka len-den
