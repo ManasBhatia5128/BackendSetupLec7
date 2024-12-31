@@ -14,3 +14,16 @@ Team should be on same page, 4 spaces, 2 spaces for git project
 for this prettier is also used as a node module, can also be installed as dev dependncy
 trailing comma: all or es5
 prettierignore: prettier ignore these things
+
+In production grade settings, we never do: allow access from anywhere
+
+Database se connect krte time problems aa sakti hain aur kaafi baar aati hain
+**try, catch use kro ya fir promise ka syntax .then() .catch() wala, koi na koi krna hi padega**
+**database is in another continent", baat krne mein time lgta hai, async await ka use karo
+
+we use IIFE(immediately invoked function expression)
+;IIEF: this syntax is used in case our editor didn't add semicolon is prev lines, then the IIFE function does problems in executing
+
+to use experimental setup of dotenv 
+add in dev in package.json
+" -r dotenv/config --experimental-json-modules src/index.js"
