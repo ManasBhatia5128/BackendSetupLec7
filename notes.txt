@@ -9,3 +9,8 @@ DB: database connection logic
 models
 routes: routes for app
 utils: utility eg file uploading, mailing, tokens ka len-den
+
+Team should be on same page, 4 spaces, 2 spaces for git project
+for this prettier is also used as a node module, can also be installed as dev dependncy
+trailing comma: all or es5
+prettierignore: prettier ignore these things
