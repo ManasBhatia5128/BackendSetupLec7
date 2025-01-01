@@ -27,3 +27,16 @@ we use IIFE(immediately invoked function expression)
 to use experimental setup of dotenv 
 add in dev in package.json
 " -r dotenv/config --experimental-json-modules src/index.js"
+syntax: dotenv.config({
+    path: './env
+})
+
+middlewares are used by app.use() syntax
+
+middleware practical example:
+think you wanted to like a video on instagram, when you clicked like you couldn't because you haven't logged in
+server tk like ki request gyi hi nhi, middleare ne use pehle hi rok liya
+also we can add multiple middlewares
+(err, req, res, next)
+next is a flag which tells if middleware is used
+higher order functions: functions which accept function as parameters
