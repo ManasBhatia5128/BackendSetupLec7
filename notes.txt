@@ -40,3 +40,18 @@ also we can add multiple middlewares
 (err, req, res, next)
 next is a flag which tells if middleware is used
 higher order functions: functions which accept function as parameters
+some examples of higher order funcns are map, filter etc or setTimeout, setInterval, basically we want to perform some operation on the function itself
+basically a HOF takes a func as parameter or might return a function
+
+
+
+Lecture-10:
+BSON is used internally by MongoDB to represent documents.
+Libraries like bson in Node.js provide methods to serialize and deserialize data to/from BSON.
+bcrypt and bcryptjs are almost similar
+bcrypt library is is used to hash passwords
+JWT: JsonWebToken: encodes payload (data)
+
+pre hook: data save hone se just pehle kuch ho jaaye, eg: password hash ho jaaye
+
+Interview: JWT is a bearer's token, jiske pass ye token hai, data usko chale jaata hai
