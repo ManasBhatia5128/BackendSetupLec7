@@ -4,7 +4,7 @@ dev dependncy: used while development not while production, it has no role in pr
 to install use --save-dev or -D ie for nodemon: npm i --save-dev nodemon
 
 controller: functionality
-middleware: request from server, middleares checks the request
+middleware: request from server, middleares checks the request -> jaane se pehle mujhse milke jaana
 DB: database connection logic
 models
 routes: routes for app
@@ -55,3 +55,12 @@ JWT: JsonWebToken: encodes payload (data)
 pre hook: data save hone se just pehle kuch ho jaaye, eg: password hash ho jaaye
 
 Interview: JWT is a bearer's token, jiske pass ye token hai, data usko chale jaata hai
+
+Lec-11
+Multer se temporarily apne local server pr file rakh denge fir uske baad Cloudinary ko di jaati hai
+(although directly bhi upload kr skte hain but production mein 2 steps use hote hain)
+Cloudinary is a service like AWS (Cloudinary also uses AWS in backend)
+Cloudinary is also an SDK
+unlink: delete
+
+We are using multer as middleware
