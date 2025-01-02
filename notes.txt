@@ -64,3 +64,5 @@ Cloudinary is also an SDK
 unlink: delete
 
 We are using multer as middleware
+25:30 => use of temp code
+files in public temp will be stored for a very little time, so we are not that bothered about filename that's why we are storing original name, change it later 33;00
