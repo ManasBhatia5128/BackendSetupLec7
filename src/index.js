@@ -3,31 +3,27 @@
 // import express from "express";
 // require("dotenv").config({path: "./env.sample"})
 
-import dotenv from "dotenv"
-dotenv.config({ path: '.env.sample' });
+import dotenv from "dotenv";
+import connectDB from "./db/index.js";
+
+dotenv.config({ path: ".env.sample" });
 import { app } from "./app.js";
 
-app.on("error", (error)=>{
-    console.log("Error occured: "+ error);
-    throw error;
-})
+app.on("error", (error) => {
+  console.log("Error occured: " + error);
+  throw error;
+});
 
-import connectDB from "./db/index.js";
 connectDB()
-.then(() => {
-    app.listen(process.env.PORT || 8000, () => {
-        console.log(`Server is running at PORT: ${process.env.PORT}`);
+  .then(() => {
+    app.listen(process.env.PORT || 7000, () => {
+      console.log(`Server is running at PORT: ${process.env.PORT}`);
     });
-})
-.catch((error) => console.log(" MongoDB connection error occured, error message: " + error));
+  })
+  .catch((error) =>
+    console.log(" MongoDB connection error occured, error message: " + error)
+  );
 // const app = express();
-
-
-
-
-
-
-
 
 /*
 (async () => { // initial semicoln can be ignored as isse pehle kuch nhi

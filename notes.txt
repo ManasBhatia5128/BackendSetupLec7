@@ -97,3 +97,29 @@ What are http headers
  3xx: Redirection
  4xx: Client error
  5xx: Server error
+
+
+ GPT token example
+ Google Sign-In and Token Flow
+Initial Login:
+
+When you log in to a Google account (with your email and password or via two-factor authentication), Google authenticates you and issues:
+An access token (short-lived).
+A refresh token (long-lived).
+These tokens are stored securely in your browser or app.
+Using Access Tokens:
+
+The access token is used to allow websites or apps to communicate with Google's APIs (e.g., Google Calendar, Gmail) without asking for your credentials every time.
+Since access tokens are short-lived, they provide enhanced security (limited window for misuse if stolen).
+Refreshing Tokens:
+
+When the access token expires, the refresh token is used behind the scenes to get a new access token without requiring you to log in again.
+This is why you can use Google services for an extended period without entering your password repeatedly.
+Refresh Token Expiry or Revocation:
+
+If the refresh token expires (e.g., after 30 days or more) or is revoked (e.g., by a password change or logout from all devices), you'll be asked to log in again.
+
+generateAccessToken → for short-term API authentication.
+generateRefreshToken → for renewing access tokens.
+
+import export statemnents detailed understanding is required
