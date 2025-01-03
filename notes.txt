@@ -66,3 +66,34 @@ unlink: delete
 We are using multer as middleware
 25:30 => use of temp code
 files in public temp will be stored for a very little time, so we are not that bothered about filename that's why we are storing original name, change it later 33;00
+
+Lecture-2
+URL/I?N: Uniform Resource Locator/ Identifier/  Name -> basically address
+
+What are http headers
+ meta data: key-val pairs sent along with request and response
+ used for caching, authenticating, state management, x-prefix: deprecated
+ Request headers: from client
+ Response headers: from server
+ Representation headers: encoding/ compression
+ Payload headers: data (payload mtlb data, just a fancy name)
+
+ most common headers:
+ accept: appln/json
+ user-agent: konsi appln se request aayi hai, postman, broweser etc
+ authorization: bearer___ JWT token
+ content-type: image/vid/pdf kaisa content
+ cookies: {key:val} pair info about user
+ cache-control: kb tk login rakhna user ko etc etc
+
+ also cors and security headers
+
+ HTTP methods: operations which can be done to interact with the server
+ GET, POST, PUT, DELETE, PATCH
+
+ HTTP status codes
+ 1xx: Informational
+ 2xx: Success
+ 3xx: Redirection
+ 4xx: Client error
+ 5xx: Server error

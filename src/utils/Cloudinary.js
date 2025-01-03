@@ -15,7 +15,7 @@ const uploadOnCloudinary = async (localFilePath) => {
             resource_type: "auto", // check type of file
         }); // public id, name etc upload options can be further given
         console.log("file has been uploaded successfully");
-        console.log(response);
+        console.log(response); // response.URL will store the image / video URL 
         return response;
         // file has been uploaded successfully
     }
