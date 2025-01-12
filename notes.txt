@@ -123,3 +123,27 @@ generateAccessToken → for short-term API authentication.
 generateRefreshToken → for renewing access tokens.
 
 import export statemnents detailed understanding is required
+
+
+lecture-14
+user registeration steps:
+1. get user data through a form from frontend
+2. check validations, correct email, fields not empty etc
+3. check if user already exists (using email or uniqe username)
+4. check if files are provided (avatar is compulsary) // multer check
+5. when checked upload avatar and image to Cloudinary, (avatar check kro) // Cloudinary check
+6. create user object -> create entry in database
+7. remove password and refresh token field from response
+8. check for user creation
+9. return response
+
+//Random GPT doubt but important
+{
+    JavaScript is synchronous by nature, executing code line by line in a single-threaded environment. However, tasks like `fetch` requests are **asynchronous** and handled by the browser or Node.js runtime, not directly by JavaScript itself. These tasks are offloaded to the browser's Web APIs or Node.js systems, allowing JavaScript to continue executing other code without blocking.
+
+Once the fetch operation completes, its result is sent back to JavaScript through the **event loop**, where the associated callback (like `.then()` or `await`) is executed when the main thread is idle. This is why a `fetch` request doesn’t block subsequent lines of code.
+
+To make code "wait" for asynchronous tasks, you can use `async/await`, which pauses the function’s execution until the task completes, while still keeping the main thread free for other operations.
+
+In summary, while JavaScript itself is synchronous, its integration with asynchronous systems like Web APIs allows non-blocking behavior for tasks such as fetch requests, timers, and I/O operations, enhancing efficiency and user experience.
+}
