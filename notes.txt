@@ -147,3 +147,8 @@ To make code "wait" for asynchronous tasks, you can use `async/await`, which pau
 
 In summary, while JavaScript itself is synchronous, its integration with asynchronous systems like Web APIs allows non-blocking behavior for tasks such as fetch requests, timers, and I/O operations, enhancing efficiency and user experience.
 }
+
+// Use of timestamps
+{
+    basically used to keep record of entities createdAt and updatedAt, basically when we have recored of this thing for each data it can be used for sorting and keeping record of when some entity is created or updated 
+}
