@@ -10,7 +10,7 @@ router.route("/register").post(
   // .fields: multiple files
   upload.fields([
     {
-      name: "avatar",
+      name: "avatar", // names should be same as frontend
       maxCount: 1,
     },
     {

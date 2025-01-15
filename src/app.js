@@ -19,8 +19,8 @@ app.use(cookieParser()); // options ka abhi tk use nhi pada hai
 import userRouter from "./routes/user.routes.js";
 
 // routes declaration
-// app.get() // we were using this earlier but not thing have seperated
-app.use(`/api/v1/users`, userRouter);
-// http://localhost:7000/api/v1/users/{route defined in routes, eg register.login}
+// app.get() // we were using this earlier since routes and control was in same place, no we use app.use()
+app.use(`/api/v1/users`, userRouter); // iss route pr contrl userRouter ko pass ho jayega
+// http://localhost:7000/api/v1/users/{route defined in routes, eg register,login}
 
 export {app};

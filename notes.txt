@@ -152,3 +152,9 @@ In summary, while JavaScript itself is synchronous, its integration with asynchr
 {
     basically used to keep record of entities createdAt and updatedAt, basically when we have recored of this thing for each data it can be used for sorting and keeping record of when some entity is created or updated 
 }
+
+
+-------------------------------------------
+Lec-14: controllers
+{} must be used while import if default keyword is not used
+?. means optional chaining, that is if exist nhi krti toh error nhi ayega
