@@ -8,13 +8,18 @@ const asyncHandler = (fn) => {
     try {
       await fn(req, res, next);
     } catch (error) {
-      res.status(error.code || 500).json({
+      const statusCode = Number.isInteger(error.code) && error.code >= 100 && error.code < 600 
+        ? error.code 
+        : 500; // do check this code again
+
+      res.status(statusCode).json({
         success: false,
-        message: error.message,
+        message: error.message || 'Internal Server Error',
       });
-    };
+    }
   };
 };
+
 
 // const asyncHandler(requestHandler) => {
 //     return (req, res, next) => {

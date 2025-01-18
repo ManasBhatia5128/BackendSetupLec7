@@ -77,9 +77,9 @@ const registerUser = asyncHandler(async (req, res) => {
     coverImage: coverImage?.url || "", // since it is not a required field
   });
 
+
   // iss se ek database call extra jaa rahi hai but confirm ho jayega ki user create hua hai ki nhi
   // also iss se hum select kr paa rhe hain ki konse fields nhi chaiye (though .create wale mein bhi kr skte the like password: undefined)
-
   const createdUser = await User.findById(username._id).select(
     "-password -refreshToken"
   ); // _id mongoDB bana leta hai har field ki

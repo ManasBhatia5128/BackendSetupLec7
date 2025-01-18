@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String, // cloudinary url, to get url of image or website
     },
+    coverImage: {
+      type: String,
+    },
     watchHistory: {
       type: [
         {

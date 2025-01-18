@@ -7,6 +7,8 @@ class APIResponse{
     }
 }
 
+export {APIResponse};
+
 /*
 statuscode > 400 => api error, not hard and fast rule but do API error for it
  */

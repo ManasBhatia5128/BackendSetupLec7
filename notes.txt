@@ -158,3 +158,7 @@ In summary, while JavaScript itself is synchronous, its integration with asynchr
 Lec-14: controllers
 {} must be used while import if default keyword is not used
 ?. means optional chaining, that is if exist nhi krti toh error nhi ayega
+
+
+Lec-15: postman
+we use data instead of json since json mein file nhi bhej sakte
