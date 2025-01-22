@@ -16,6 +16,7 @@ const asyncHandler = (fn) => {
         success: false,
         message: error.message || 'Internal Server Error',
       });
+      console.log(error);
     }
   };
 };

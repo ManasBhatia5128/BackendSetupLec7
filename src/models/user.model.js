@@ -57,7 +57,7 @@ userSchema.pre("save", async function () {
     return; // if not modified, return
   }
   this.password = await bcrypt.hash(this.password, 10); // samay lgta hai hashing mein
-  next();
+  // next();
 }); // arrow function mein current obj ie "this" ka reference nhi milta, that's why we have to use normal function
 // say bande ne apni photo hi change kri, save pr click kra, ab kyunki prehook hai toh save se pehle firse run ho jayegi
 // hame sirf password change pr hi code run krna hai ye

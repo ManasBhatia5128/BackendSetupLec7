@@ -6,9 +6,13 @@ dotenv.config({ path: ".env.sample" });
 const connectDB = async () => {
   try {
     const connectionInstance = await mongoose.connect(
-      `${process.env.MONGODB_URI}/${DB_NAME}`
+      `${process.env.MONGODB_URI}/${DB_NAME}`,
+      {
+        useNewUrlParser: true, // for handling symbols like @ in dbname
+        useUnifiedTopology: true, // for running new methods
+      }
     );
-    console.log(`\n MongoDB connected !! HOST: ${connectionInstance.host}`);
+    console.log(`\n MongoDB connected !! HOST: ${connectionInstance.connection.host}`); // do not directly write host it it connectionInstance.connection.host not connectionInstance.host
   } catch (error) {
     console.log("MongoDB connection error: " + error);
     process.exit(1);
