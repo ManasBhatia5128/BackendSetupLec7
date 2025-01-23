@@ -56,14 +56,17 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new APIError(400, "Avatar file is required");
   }
   const avatarLocalPath = req.files?.avatar[0]?.path; // req.files is option given by multer to handle files, .body is given by express
-  const coverImageLocalPath = req.files?.coverImage == null ? "" : req.files.coverImage[0]?.path; // undefined[0] will throw an error
+  const coverImageLocalPath =
+    req.files?.coverImage == null ? "" : req.files.coverImage[0]?.path; // undefined[0] will throw an error
 
   if (!avatarLocalPath) {
     throw new APIError(400, "Avatar file is required");
   }
 
   const avatar = await uploadOnCloudinary(avatarLocalPath);
-  const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+  const coverImage = coverImageLocalPath
+    ? await uploadOnCloudinary(coverImageLocalPath)
+    : "";
 
   if (!avatar) {
     // double check
@@ -79,7 +82,6 @@ const registerUser = asyncHandler(async (req, res) => {
     avatar: avatar.url,
     coverImage: coverImage?.url || "", // since it is not a required field
   });
-
 
   // iss se ek database call extra jaa rahi hai but confirm ho jayega ki user create hua hai ki nhi
   // also iss se hum select kr paa rhe hain ki konse fields nhi chaiye (though .create wale mein bhi kr skte the like password: undefined)
