@@ -16,7 +16,7 @@ const uploadOnCloudinary = async (localFilePath) => {
     }); // public id, name etc upload options can be further given
     console.log("file has been uploaded successfully");
     console.log(response); // response.URL will store the image / video URL
-    // fs.unlinkSync(localFilePath);
+    fs.unlinkSync(localFilePath);
     return response;
     // file has been uploaded successfully
   } catch (error) {

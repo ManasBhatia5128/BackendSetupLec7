@@ -132,7 +132,7 @@ const loginUser = asyncHandler(async (req, res) => {
    */
 
   const {username, email, password} = req.body;
-  if(!username || !email){
+  if(!(username || email)){
     throw new APIError(400, "username or email is required");
   }
 
@@ -141,12 +141,12 @@ const loginUser = asyncHandler(async (req, res) => {
   });
 
   if(!user){
-    throw new APIError("User does not exist");
+    throw new APIError(400,"User does not exist");
   }
 
   // User: mongoose object to use methods, user: jo user hame actual mein banaya hai 
 
-  const isPasswordValid = await user.isPasswordCorrect(password);
+  const isPasswordValid = await user.isPasswordCorrect(password); // ye vo user jiska data hum access kr rhe hain ie specific user, "User"-> ye model wala User hai
 
   if(!isPasswordValid){
     throw new APIError("Invalid user credentials");
@@ -198,7 +198,7 @@ const logoutUser = asyncHandler(async(req, res) => {
     secure: true,
   }
 
-  return res
+  return res // res mein mil rha hai uss specific user ka access??
   .status(300)
   .clearCookie("accessToken", options)
   .clearCookie("refreshToken", options)

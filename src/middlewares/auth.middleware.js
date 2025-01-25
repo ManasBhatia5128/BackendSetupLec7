@@ -1,7 +1,7 @@
-import { APIError } from "../utils/APIError";
-import { asyncHandler } from "../utils/asyncHandler";
-import { jwt } from "jsonwebtoken";
-import { User } from "../models/user.model";
+import { APIError } from "../utils/APIError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import jwt from "jsonwebtoken";
+import { User } from "../models/user.model.js";
 
 export const verifyJWT = asyncHandler(async (req, _, next) => { // jo cheez (res in this case) use nhi ho rhe uski jagah _ likh sakte hain 
     // req: object jisme body jaise aur objects hain, req.cookies -> cookies object
