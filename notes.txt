@@ -162,3 +162,12 @@ Lec-14: controllers
 
 Lec-15: postman
 we use data instead of json since json mein file nhi bhej sakte
+
+Lec-16: tokens, cookies, middleares
+Access Token: Short lived
+Refresh token: Long lived
+access token -> for authentication, that is user ko dubara login na krna padega
+refresh token -> to obtain new access token, eg google single button expires after 1-2 week and you have to enter password again
+say access token expired in 15 min, but if user has refresh token we again get access token and thus access to the website
+
+Problem with logout: How will you access the user? you want to do user.findById but hamare pass kuch access nhi  username, email etc aur agar form ke through user se access le bhi lein toh fir toh koi bhi kisi bhi dusre user ko logout krwa sakta hai

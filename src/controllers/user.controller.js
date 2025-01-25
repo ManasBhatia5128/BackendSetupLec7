@@ -4,6 +4,22 @@ import { APIResponse } from "../utils/APIResponse.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 
+const generateAccessAndRefreshTokens = async (userId) => {
+  try {
+    const user = User.findById(userId);
+    const accessToken = user.generateAccessToken(); 
+    const refreshToken = user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    // user.save(); // however with this syntax all fields kick in ie sabhi fields ka hona zaruri hai however token save krte time baaki fields toh hame daale nhi so we write put validateBeforeSave to false again
+    await user.save({validateBeforeSave: false});
+    return {accessToken, refreshToken};
+
+  } catch (error) {
+    throw new APIError(500, "Something went wrong while generating access and refresh tokens")
+  }
+}
+
 const registerUser = asyncHandler(async (req, res) => {
   /*
   1. get user data through a form from frontend
@@ -98,4 +114,95 @@ const registerUser = asyncHandler(async (req, res) => {
     .json(new APIResponse(201, createdUser, "User registered successfully"));
 });
 
-export { registerUser };
+const loginUser = asyncHandler(async (req, res) => {
+  /* 
+  1.) Check if user already exists (req.body.email or req.body.username) by making call to the database 
+  2.) If user doesn't exists, redirect him/her to register page
+  3.) If user does exist, check if it has access token (maybe it is stored in cookies), and log him after checking the password
+  4.) If time has expired, check for refresh token and authenticate the user and log him
+  5.) Bs bcc
+   */
+  /* 
+  Actual steps
+  1.) req.body -> data
+  2.) find the person by username or email if it exists
+  3.) if it exists, log him by verifiying password, if not redirect to reigster page
+  4.) generate access and refresh token
+  5.) send cookies and successful response message
+   */
+
+  const {username, email, password} = req.body;
+  if(!username || !email){
+    throw new APIError(400, "username or email is required");
+  }
+
+  const user = await User.findOne({ // dono se search kro aur kisi se bhi mil jaaye toh user return kr do
+    $or: [{username, email}] // $or is mongoDB operator
+  });
+
+  if(!user){
+    throw new APIError("User does not exist");
+  }
+
+  // User: mongoose object to use methods, user: jo user hame actual mein banaya hai 
+
+  const isPasswordValid = await user.isPasswordCorrect(password);
+
+  if(!isPasswordValid){
+    throw new APIError("Invalid user credentials");
+  }
+
+  const {accessToken, refreshToken} = generateAccessAndRefreshTokens(user._id);
+
+  // now we have got access and refresh tokens, now we have to return the user in response and we havd to choices as of now, either update the existing "user", ie hide its password, and update access and refresh tokens as they are generated later OR we can make a new query to database which might be a time and resourse intensive operation, we will go with the second method
+
+  const loggedInUser = await User.findById(user._id)
+  .select("-password -refreshToken");
+
+  const options = {
+    httpOnly: true,
+    secure: true, // basically now only server can modify the cookies
+  }
+
+  return res
+  .status(200)
+  .cookie("accessToken", accessToken, options)
+  .cookie("refreshToken", refreshToken, options) // It is because of using cookieParser()
+  .json(
+    new APIResponse(200, 
+      {
+        user: loggedInUser, accessToken, refreshToken // alag se kyu bhej rhe hain if loggedIn user mein hai but we do it if user (frontend engineer wants to save it in local storage or do something with it)
+      },
+      "User is logged in successfully"
+    )
+  )
+
+});
+
+const logoutUser = asyncHandler(async(req, res) => {
+  // We can now access req.user since ab apni process midlleware se pass ho gyi hai
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: {
+        refreshToken: undefined
+      }
+    },
+    {
+      new: true // so we get updated value of refeshToken in new response
+    }
+  )
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  }
+
+  return res
+  .status(300)
+  .clearCookie("accessToken", options)
+  .clearCookie("refreshToken", options)
+  .json(new APIResponse(200, {}, "User logged out successfully"));
+});
+
+export { registerUser, loginUser, logoutUser };
