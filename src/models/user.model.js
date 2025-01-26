@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
   {
@@ -53,8 +54,8 @@ const userSchema = new mongoose.Schema(
 // It is a kind of middleware'
 // This encryption and decryption takes time so we have to make it as async function
 userSchema.pre("save", async function (next) {
-  if (!this.isModified(this.password)) {
-    return; // if not modified, return
+  if (!this.isModified('password')) {
+    return next(); // if not modified, return
   }
   this.password = await bcrypt.hash(this.password, 10); // samay lgta hai hashing mein
   next(); // ab agla function/middleware run kr lo
@@ -67,7 +68,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 };
 
 userSchema.methods.generateAccessToken = function () {
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this.id,
       email: this.email,
@@ -82,7 +83,7 @@ userSchema.methods.generateAccessToken = function () {
 };
 
 userSchema.methods.generateRefreshToken = function () {
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this.id,
       email: this.email,

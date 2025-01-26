@@ -171,3 +171,6 @@ refresh token -> to obtain new access token, eg google single button expires aft
 say access token expired in 15 min, but if user has refresh token we again get access token and thus access to the website
 
 Problem with logout: How will you access the user? you want to do user.findById but hamare pass kuch access nhi  username, email etc aur agar form ke through user se access le bhi lein toh fir toh koi bhi kisi bhi dusre user ko logout krwa sakta hai
+
+Lec-17
+Do understand that when we write throw new APIError we are not actually throwning an error and crashing the application we are just outputing the error response, but many a times its good to throw error and crash application rather than getting a fake 200 response
