@@ -174,3 +174,6 @@ Problem with logout: How will you access the user? you want to do user.findById 
 
 Lec-17
 Do understand that when we write throw new APIError we are not actually throwning an error and crashing the application we are just outputing the error response, but many a times its good to throw error and crash application rather than getting a fake 200 response
+
+Lec-18
+Do remember that for file updation in any model say user model profile pic, keep file updation controllers seperate, conjestion km hota hai saari fields update nhi karni padti
