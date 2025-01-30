@@ -2,7 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { APIError } from "../utils/APIError.js";
 import { APIResponse } from "../utils/APIResponse.js";
 import { User } from "../models/user.model.js";
-import { uploadOnCloudinary } from "../utils/Cloudinary.js";
+import { uploadOnCloudinary, deleteFromCloudinary } from "../utils/Cloudinary.js";
 import { verify } from "jsonwebtoken";
 import jwt from "jsonwebtoken";
 
@@ -311,7 +311,12 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
   .json(new APIResponse(200, user, "User details updated successfully"))
 });
 
-const updateUserAvatar = asyncHandler(async(req, res) => {
+const updateUserAvatar = asyncHandler(async (req, res) => {
+  // this code snippet is making the database to make two calls, replace it later with user.findOneAndUpdate acc to GPT
+  const prevUser = await User.findById(req.user?._id).select("avatar"); 
+  const prevAvatar = prevUser?.avatar;
+  await deleteFromCloudinary(prevAvatar);
+
   const avatarLocalPath = req.file?.path; // how tf is this code getting the required file??
   if(!avatarLocalPath){
     throw new APIError(400, "Avatar file is missing!");
@@ -328,7 +333,7 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
         avatar: avatar.url,
       }
     },
-    {new: true}
+    {new: true} // It will return new updated object
   ).select("-password");
   return res
   .status(200)

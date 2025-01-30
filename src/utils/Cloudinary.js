@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
+import { log } from "console";
 import fs from "fs"; // fs is file system used to perform file read write etc information
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -26,4 +27,27 @@ const uploadOnCloudinary = async (localFilePath) => {
   }
 };
 
-export { uploadOnCloudinary };
+const deleteFromCloudinary = async (imageUrl) => {
+  try{
+    if(!imageUrl){
+      throw Error("Image url is required!");
+    }
+    const regex = /\/upload\/(?:v\d+\/)?(.+?)(\.[a-z]+)?$/;
+    const match = imageUrl.match(regex);
+    const publicUrl =  match ? match[1] : null;
+
+    await cloudinary.uploader.destroy(publicUrl, (error, result) => {
+      if(error){
+        console.log("Error message: "+error);
+      }
+      else{
+        console.log("Uploaded successfully! "+result);
+      }
+    });
+  }
+  catch(error){
+    console.log(error);
+  }
+}
+
+export { uploadOnCloudinary, deleteFromCloudinary };

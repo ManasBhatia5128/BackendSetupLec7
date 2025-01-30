@@ -177,3 +177,14 @@ Do understand that when we write throw new APIError we are not actually thrownin
 
 Lec-18
 Do remember that for file updation in any model say user model profile pic, keep file updation controllers seperate, conjestion km hota hai saari fields update nhi karni padti
+
+Lec-19
+Understand why do you have to create the subscription model in the first place, you could also place subscribers in the users model by making array of ids of subscribers, but if we were to delete any subscriber, the re-arrangement of the data structure will be a heavily resource intensive operation
+
+now how will we count subscribers of a channel
+we will look up those documents in which channel is CAC (say) 
+it will look up those documents and we get count of documents, which is equal to the no of subscribers of CAC
+
+now you want to know how many channels does a has subscribed
+now we will look up for documents where subscriber is a, and we will get the channels a has subscribed
+the count of the documents is the no of channels a has subscribed
